@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Stack_Sum
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nums = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            Stack<int> stack = new Stack<int>(nums);
+
+            while (true)
+            {
+                string cmd = Console.ReadLine().ToLower();
+                string[] elements = cmd.Split(' ');
+                if (elements[0] == "end")
+                {
+                    break;
+                }
+                else if (elements[0] == "add")
+                {
+                    int n1 = int.Parse(elements[1]);
+                    int n2 = int.Parse(elements[2]);
+                    stack.Push(n1);
+                    stack.Push(n2);
+                }
+                else if (elements[0] == "remove")
+                {
+                    int counter = int.Parse(elements[1]);
+                    if (stack.Count < counter)
+                    {
+                        continue;
+                    }
+                    for (int i = 0; i < counter; i++)
+                    {
+                        stack.Pop();
+                    }
+                }
+            }
+            int sum = stack.Sum();
+            Console.WriteLine($"Sum: {sum}");
+
+        }
+    }
+}
